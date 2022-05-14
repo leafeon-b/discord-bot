@@ -47,9 +47,6 @@ class DenpoView(disnake.ui.View):
         self.sort_hint()
         self.update_embed()
 
-        # 動作確認用のヒントを追加
-        self.hints.append(Hint(author_id=123, author="author1", phrase="デンポー"))
-        self.hints.append(Hint(author_id=456, author="author2", phrase="ゲーム"))
         self.sort_hint()
         self.update_embed()
     
