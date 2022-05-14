@@ -65,7 +65,6 @@ class DenpoView(disnake.ui.View):
         )
 
     async def show_next_hint(self, inter: disnake.MessageInteraction, index: int = 0):
-        print(self.hints[index])
         async def next_hint_callback(tmp_inter: disnake.MessageInteraction):
             await self.show_next_hint(tmp_inter, index + 1)
         next_hint_button = disnake.ui.Button(label="次のヒントを表示")
@@ -155,8 +154,6 @@ class DenpoModal(disnake.ui.Modal):
                     await inter.response.send_message("すでに送信済み")
                     return
                 self.view.append_hint(Hint(inter.author.id, inter.author.display_name, value))
-                print(f"{inter.author=}")
-                print(f"{inter.author.display_name=}")
                 await self.inter.message.edit(view=self.view, embed=self.view.embed)
             embed.add_field(
                 name=key.capitalize(),
