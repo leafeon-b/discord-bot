@@ -1,1 +1,1 @@
-main: python exp.py
+main: bash start.sh
