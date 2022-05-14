@@ -13,7 +13,7 @@ set -eu
 
 
 function main() {
-  python exp.py
+  python src/main/main.py
 }
 
 pushd `dirname "$0"` > /dev/null
