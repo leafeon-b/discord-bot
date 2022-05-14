@@ -2,14 +2,15 @@
 import random
 
 import disnake
+from disnake.ext import commands
+
 import settings
 from DenpoView import DenpoView
-from disnake.ext import commands
 
 
 class Bot(commands.Bot):
     def __init__(self, intents: disnake.Intents):
-        super().__init__(command_prefix=commands.when_mentioned, intents=intents, test_guilds=[settings.GUILD_ID])
+        super().__init__(command_prefix=commands.when_mentioned, intents=intents, test_guilds=settings.GUILD_IDS)
 
     async def on_ready(self):
         print(f"Logged in as {self.user} (ID: {self.user.id})")
@@ -23,11 +24,6 @@ bot = Bot(intents)
 @bot.slash_command()
 async def denpo(inter: disnake.AppCmdInter):
     """Starts Denpo game."""
-    vc: disnake.VoiceChannel = disnake.utils.get(inter.guild.voice_channels, name="General")
-    print(vc)
-    member_names = [member.name for member in vc.members]
-    print(f"{member_names=}")
-
     view = DenpoView()
     await inter.send(embed=view.embed, view=view)
 

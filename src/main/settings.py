@@ -1,3 +1,4 @@
+import json
 import os
 from os.path import dirname, join
 
@@ -10,5 +11,6 @@ load_dotenv(dotenv_path)
 
 TOKEN = os.environ.get("TOKEN")
 # BOT_ID = int(os.environ.get("BOT_ID"))
-GUILD_ID = int(os.environ.get("GUILD_ID"))
+# GUILD_ID = int(os.environ.get("GUILD_ID"))
 APPLICATION_ID = int(os.environ.get("APPLICATION_ID"))
+GUILD_IDS = json.loads(os.environ.get("GUILD_IDS"))
