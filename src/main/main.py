@@ -41,12 +41,12 @@ async def shuffle(inter: disnake.AppCmdInter, vc: disnake.VoiceChannel = None):
     await inter.response.send_message(embed=embed)
 
 
-@bot.slash_command(name="char")
-async def random_character(inter: disnake.AppCmdInter):
+@bot.slash_command(name="hiragana")
+async def random_hiragana(inter: disnake.AppCmdInter):
     """Creates random Hiragana."""
-    characters = ["あ","い","う","え","お","か","き","く","け","こ","さ","し","す","せ","そ","た","ち","つ","て","と","な","に","ぬ","ね","の","は","ひ","ふ","へ","ほ","ま","み","む","め","も","や","ゆ","よ","ら","り","る","れ","ろ","わ","を","ん"]
-    c = random.choice(characters)
-    await inter.response.send_message(c)
+    hiraganas = ["あ","い","う","え","お","か","き","く","け","こ","さ","し","す","せ","そ","た","ち","つ","て","と","な","に","ぬ","ね","の","は","ひ","ふ","へ","ほ","ま","み","む","め","も","や","ゆ","よ","ら","り","る","れ","ろ","わ","を","ん"]
+    h = random.choice(hiraganas)
+    await inter.response.send_message(h)
 
 
 @bot.slash_command(name="ito", description="Creates random natural number <= 100. This message is shown to only you.")
