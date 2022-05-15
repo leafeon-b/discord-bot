@@ -33,9 +33,12 @@ async def shuffle(inter: disnake.AppCmdInter, vc: disnake.VoiceChannel = None):
     """Shuffle vc members(default vc is "一般")."""
     if vc is None:
         vc = disnake.utils.get(inter.guild.voice_channels, name="一般")
-    member_names = [member.name for member in vc.members]
+    member_names = [f"{i + 1}: **{member.mention}**" for i, member in enumerate(vc.members)]
     random.shuffle(member_names)
-    await inter.response.send_message("\n".join(member_names))
+    embed = disnake.Embed(title="", color=disnake.Colour.brand_green(), timestamp=datetime.datetime.now())
+    embed.add_field(name=f"Members in \"{vc.name}\"", value="\n".join(member_names), inline=False)
+    embed.set_author(name=inter.author.display_name, icon_url=inter.author.display_avatar)
+    await inter.response.send_message(embed=embed)
 
 
 @bot.slash_command(name="char")
