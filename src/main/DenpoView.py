@@ -54,14 +54,14 @@ class DenpoView(disnake.ui.View):
         return disnake.Embed(
             title=title,
             description=description,
-            color=0x9C84EF,
+            color=disnake.Colour.blurple(),
             timestamp=datetime.now()
         )
 
     def update_embed(self):
         self.embed = self.create_embed(
             title="Denpo!!",
-            description=f"{len(self.hints)}人が送信済み",
+            description=f"{len(self.hints)} 人が送信済み",
         )
 
     async def show_next_hint(self, inter: disnake.MessageInteraction, index: int = 0):
@@ -93,7 +93,7 @@ class DenpoView(disnake.ui.View):
 
         description = ""
         for i in range(index + 1):
-            description += f"{self.hints[i].phrase}\n"
+            description += f"{self.hints[i].phrase} ({self.hints[i].author})\n"
         embed = self.create_embed(
             title="Denpo!!",
             description=description
@@ -151,13 +151,13 @@ class DenpoModal(disnake.ui.Modal):
             if key == "hint":
                 author_id = inter.author.id
                 if author_id in [hint.author_id for hint in self.view.hints]:
-                    await inter.response.send_message("すでに送信済み")
+                    await inter.response.send_message(f"{inter.author.display_name} はすでにヒントを送信済みです.")
                     return
                 self.view.append_hint(Hint(inter.author.id, inter.author.display_name, value))
                 await self.inter.message.edit(view=self.view, embed=self.view.embed)
             embed.add_field(
-                name=key.capitalize(),
-                value=value[:1024],
+                name="Your Hint",
+                value=value[:1024], # 1024文字が上限
                 inline=False,
             )
-        await inter.response.send_message(content=str(self.view.hints), embed=embed, ephemeral=True)
+        await inter.response.send_message(embed=embed, ephemeral=True)
