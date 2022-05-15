@@ -55,7 +55,7 @@ async def random_hiragana(inter: disnake.AppCmdInter):
 async def random_n(inter: disnake.AppCmdInter):
     """Creates random natural number <= 100. This message is shown to only you."""
     n = random.randint(1, 100)
-    embed = MyEmbed(inter=inter, title=n, color=disnake.Color.dark_gold())
+    embed = MyEmbed(inter=inter, title=n, color=disnake.Color.dark_orange())
     await inter.response.send_message(embed=embed, ephemeral=True)
 
 
@@ -63,7 +63,7 @@ async def random_n(inter: disnake.AppCmdInter):
 async def dice(inter: disnake.AppCmdInter, number: commands.Range[1, ...]):
     """Show the result of dice roll only to you."""
     n = random.randint(1, number)
-    embed = MyEmbed(inter=inter, title=n, color=disnake.Color.dark_gold())
+    embed = MyEmbed(inter=inter, title=n, color=disnake.Color.fuchsia())
     await inter.response.send_message(embed=embed, ephemeral=True)
 
 

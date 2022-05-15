@@ -5,6 +5,8 @@ from typing import ClassVar
 import disnake
 from disnake import Embed, MessageInteraction, TextInputStyle
 
+from MyEmbed import MyEmbed
+
 
 @dataclass
 class Hint:
@@ -52,7 +54,7 @@ class DenpoView(disnake.ui.View):
 
     def create_embed(self, *, title: str, description: str) -> disnake.Embed:
         return disnake.Embed(
-            title=title, description=description, color=disnake.Colour.blurple(), timestamp=datetime.now()
+            title=title, description=description, color=disnake.Color.blurple(), timestamp=datetime.now()
         )
 
     def update_embed(self):
@@ -108,7 +110,8 @@ class DenpoView(disnake.ui.View):
 
     @disnake.ui.button(label="ゲームを終了")
     async def exit(self, button: disnake.ui.Button, inter: disnake.MessageInteraction):
-        await inter.message.edit(content="ゲームを終了しました.", view=None, embed=None)
+        embed = MyEmbed(inter=inter, title="ゲームを終了しました.", color=disnake.Color.blurple())
+        await inter.message.edit(view=None, embed=embed)
 
 
 class DenpoModal(disnake.ui.Modal):
@@ -136,7 +139,8 @@ class DenpoModal(disnake.ui.Modal):
 
     # The callback received when the user input is completed.
     async def callback(self, inter: disnake.ModalInteraction):
-        embed = disnake.Embed(title="")
+        embed = disnake.Embed(title="", color=disnake.Color.light_gray())
+        embed.set_author(name=inter.author.display_name, icon_url=inter.author.display_avatar)
         for key, value in inter.text_values.items():
             if key == "hint":
                 author_id = inter.author.id
