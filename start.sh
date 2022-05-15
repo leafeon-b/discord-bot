@@ -13,7 +13,6 @@ set -eu
 
 
 function main() {
-  echo Start Discord Bot
   python src/main/main.py
 }
 
