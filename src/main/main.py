@@ -35,8 +35,9 @@ async def shuffle(inter: disnake.AppCmdInter, vc: disnake.VoiceChannel = None):
     """Shuffle vc members(default vc is "一般")."""
     if vc is None:
         vc = disnake.utils.get(inter.guild.voice_channels, name="一般")
-    member_names = [f"{i + 1}: **{member.mention}**" for i, member in enumerate(vc.members)]
-    random.shuffle(member_names)
+    members = vc.members
+    random.shuffle(members)
+    member_names = [f"{i + 1}: **{member.mention}**" for i, member in enumerate(members)]
     embed = MyEmbed(inter=inter, title="", color=disnake.Color.brand_green())
     embed.add_field(name=f"Members in \"{vc.name}\"", value="\n".join(member_names), inline=False)
     await inter.response.send_message(embed=embed)
