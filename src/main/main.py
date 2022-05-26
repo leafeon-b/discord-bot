@@ -31,7 +31,9 @@ async def denpo(inter: disnake.AppCmdInter):
 
 @bot.slash_command()
 async def shuffle(inter: disnake.AppCmdInter, vc: disnake.VoiceChannel = None):
-    """Shuffle vc members(default vc is "一般")."""
+    """Shuffle vc members(default vc is the one that you are in, or else "一般")."""
+    if vc is None:
+        vc = inter.author.voice.channel
     if vc is None:
         vc = disnake.utils.get(inter.guild.voice_channels, name="一般")
     members = vc.members
