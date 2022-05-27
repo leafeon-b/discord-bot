@@ -25,14 +25,18 @@ bot = Bot(intents)
 
 @bot.slash_command()
 async def denpo(inter: disnake.AppCmdInter):
-    """Starts Denpo game."""
+    """デンポー!!ゲームを開始する"""
     view = DenpoView()
     await inter.send(embed=view.embed, view=view)
 
 
 @bot.slash_command()
 async def shuffle(inter: disnake.AppCmdInter, vc: disnake.VoiceChannel = None):
-    """Shuffle vc members(default vc is the one that you are in, or else "一般")."""
+    # """Shuffle vc members(default vc is the one that you are in, or else "一般")."""
+    """VCにいるメンバーをシャッフルする.
+    VCを指定しない場合はコマンドの使用者が入っているVCが適用される.
+    コマンドの使用者がVCに入っていない場合は"一般"チャンネルが適用される.
+    """
     if vc is None:
         vc = inter.author.voice.channel
     if vc is None:
@@ -55,7 +59,7 @@ async def poll(inter: disnake.AppCmdInter, vc: disnake.VoiceChannel = None):
 
 @bot.slash_command(name="hiragana")
 async def random_hiragana(inter: disnake.AppCmdInter):
-    """Creates random Hiragana."""
+    """ひらがな1文字をランダム生成"""
     hiraganas = ["あ","い","う","え","お","か","き","く","け","こ","さ","し","す","せ","そ","た","ち","つ","て","と","な","に","ぬ","ね","の","は","ひ","ふ","へ","ほ","ま","み","む","め","も","や","ゆ","よ","ら","り","る","れ","ろ","わ","を","ん"]
     h = random.choice(hiraganas)
     embed = MyEmbed(inter=inter, title=h, color=disnake.Color.dark_gold())
@@ -64,7 +68,7 @@ async def random_hiragana(inter: disnake.AppCmdInter):
 
 @bot.slash_command(name="ito")
 async def random_n(inter: disnake.AppCmdInter):
-    """Creates random natural number <= 100. This message is shown to only you."""
+    """100以下の自然数をランダム生成(自分だけに表示)"""
     n = random.randint(1, 100)
     embed = MyEmbed(inter=inter, title=n, color=disnake.Color.dark_orange())
     await inter.response.send_message(embed=embed, ephemeral=True)
@@ -72,7 +76,7 @@ async def random_n(inter: disnake.AppCmdInter):
 
 @bot.slash_command()
 async def dice(inter: disnake.AppCmdInter, number: commands.Range[1, ...]):
-    """Show the result of dice roll only to you."""
+    """指定した数を最大値としたサイコロを振る(自分だけに表示)"""
     n = random.randint(1, number)
     embed = MyEmbed(inter=inter, title=n, color=disnake.Color.fuchsia())
     await inter.response.send_message(embed=embed, ephemeral=True)
@@ -80,7 +84,7 @@ async def dice(inter: disnake.AppCmdInter, number: commands.Range[1, ...]):
 
 @bot.slash_command()
 async def help(inter: disnake.AppCmdInter):
-    """Shows the list of this bot's commands."""
+    """このBOTの定義コマンド一覧(自分だけに表示)"""
     all_commands: set[commands.slash_core.InvokableSlashCommand] = bot.slash_commands
     embed = MyEmbed(inter=inter, title="コマンド一覧", description="このBOTの定義コマンド一覧", color=disnake.Color.dark_blue())
     for command in all_commands:
