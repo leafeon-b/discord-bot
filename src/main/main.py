@@ -79,12 +79,6 @@ async def dice(inter: disnake.AppCmdInter, number: commands.Range[1, ...]):
 
 
 @bot.slash_command()
-async def d(inter: disnake.AppCmdInter, number: commands.Range[1, ...]):
-    """Alias of dice."""
-    await dice(inter, number)
-
-
-@bot.slash_command()
 async def help(inter: disnake.AppCmdInter):
     """Shows the list of this bot's commands."""
     all_commands: set[commands.slash_core.InvokableSlashCommand] = bot.slash_commands
