@@ -82,7 +82,7 @@ async def dice(inter: disnake.AppCmdInter, number: commands.Range[1, ...]):
 async def help(inter: disnake.AppCmdInter):
     """Shows the list of this bot's commands."""
     all_commands: set[commands.slash_core.InvokableSlashCommand] = bot.slash_commands
-    embed = MyEmbed(inter=inter, title="コマンド一覧", color=disnake.Color.dark_blue())
+    embed = MyEmbed(inter=inter, title="コマンド一覧", description="このBOTの定義コマンド一覧", color=disnake.Color.dark_blue())
     for command in all_commands:
         embed.add_field(name=command.name, value=command.description, inline=False)
     await inter.response.send_message(embed=embed, ephemeral=True)
