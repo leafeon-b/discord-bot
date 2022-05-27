@@ -7,6 +7,7 @@ from disnake.ext import commands
 import settings
 from DenpoView import DenpoView
 from MyEmbed import MyEmbed
+from PollView import PollView
 
 
 class Bot(commands.Bot):
@@ -42,6 +43,14 @@ async def shuffle(inter: disnake.AppCmdInter, vc: disnake.VoiceChannel = None):
     embed = MyEmbed(inter=inter, title="", color=disnake.Color.brand_green())
     embed.add_field(name=f"Members in \"{vc.name}\"", value="\n".join(member_names), inline=False)
     await inter.response.send_message(embed=embed)
+
+
+@bot.slash_command()
+async def poll(inter: disnake.AppCmdInter, vc: disnake.VoiceChannel = None):
+    """投票"""
+
+    view = PollView(inter, vc)
+    await inter.send(embed=view.embed, view=view)
 
 
 @bot.slash_command(name="hiragana")
