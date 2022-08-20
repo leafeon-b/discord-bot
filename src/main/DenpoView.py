@@ -128,7 +128,7 @@ class DenpoModal(disnake.ui.Modal):
                 placeholder="ここにあなたのヒントを入力してください.",
                 custom_id="hint",
                 style=TextInputStyle.single_line,
-                max_length=50,
+                max_length=6,
             ),
         ]
         super().__init__(
