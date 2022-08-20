@@ -1,6 +1,7 @@
+import re
 from dataclasses import dataclass
 from datetime import datetime
-from typing import ClassVar
+from typing import ClassVar, Pattern
 
 import disnake
 from disnake import Embed, MessageInteraction, TextInputStyle
@@ -144,8 +145,12 @@ class DenpoModal(disnake.ui.Modal):
         for key, value in inter.text_values.items():
             if key == "hint":
                 author_id = inter.author.id
-                if author_id in [hint.author_id for hint in self.view.hints]:
+                if author_id in [hint.author_id for hint in self.view.hints]: # ユーザがすでにヒントを送信済みかチェック
                     await inter.response.send_message(f"{inter.author.display_name} はすでにヒントを送信済みです.")
+                    return
+                p: Pattern = re.compile(r'^[ぁ-ゖ]+$')
+                if p.fullmatch(value) is None: # ヒントにひらがな以外の文字が含まれていないかチェック
+                    await inter.response.send_message("ヒントはひらがなのみ使用できます.")
                     return
                 self.view.append_hint(Hint(inter.author.id, inter.author.display_name, value))
                 await self.inter.message.edit(view=self.view, embed=self.view.embed)
