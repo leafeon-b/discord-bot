@@ -90,7 +90,8 @@ class DenpoView(disnake.ui.View):
 
         description = ""
         for i in range(index + 1):
-            description += f"{self.hints[i].phrase} ({self.hints[i].author})\n"
+            phrase = f"__{self.hints[i].phrase}__" if i == index else self.hints[i].phrase # 最後に追加したヒントは下線で強調
+            description += f"{phrase} ({self.hints[i].author})\n"
         embed = self.create_embed(title="Denpo!!", description=description)
         await inter.response.edit_message(view=view, embed=embed)
 
