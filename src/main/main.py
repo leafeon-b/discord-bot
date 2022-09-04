@@ -78,7 +78,7 @@ async def random_n(inter: disnake.AppCmdInter):
 async def dice(inter: disnake.AppCmdInter, number: commands.Range[1, ...]):
     """指定した数を最大値としたサイコロを振る(自分だけに表示)"""
     n = random.randint(1, number)
-    embed = MyEmbed(inter=inter, title=n, color=disnake.Color.fuchsia())
+    embed = MyEmbed(inter=inter, title=n, description="", color=disnake.Color.fuchsia())
     await inter.response.send_message(embed=embed, ephemeral=True)
 
 
