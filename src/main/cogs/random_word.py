@@ -1,11 +1,15 @@
-from disnake.ext import commands
 import disnake
-
+from disnake.ext import commands
 from WordView import WordView
+
 
 class RandomWord(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
+
+    @commands.Cog.listener()
+    async def on_ready(self):
+        print(f"{__name__} cog loaded.")
 
     # @commands.slash_command()
     # async def hello(self, ctx, *, member: disnake.Member = None):
