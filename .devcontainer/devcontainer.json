@@ -40,7 +40,8 @@
 				"johnpapa.vscode-peacock",
 				"redhat.vscode-yaml",
 				"mechatroner.rainbow-csv",
-				"ms-python.isort"
+				"ms-python.isort",
+				"ms-python.black-formatter"
 			]
 		}
 	},
