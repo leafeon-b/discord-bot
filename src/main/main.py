@@ -4,6 +4,7 @@ import disnake
 import settings
 from cogs.denpo import Denpo
 from cogs.random_word import RandomWord
+from cogs.shuffle import Shuffle
 from components.PollView import PollView
 from disnake.ext import commands
 from MyEmbed import MyEmbed
@@ -22,24 +23,7 @@ intents = disnake.Intents.all()
 bot = Bot(intents)
 bot.add_cog(RandomWord(bot))
 bot.add_cog(Denpo(bot))
-
-
-@bot.slash_command()
-async def shuffle(inter: disnake.AppCmdInter, vc: disnake.VoiceChannel = None):
-    """VCにいるメンバーをシャッフルする.
-    VCを指定しない場合はコマンドの使用者が入っているVCが適用される.
-    コマンドの使用者がVCに入っていない場合は"一般"チャンネルが適用される.
-    """
-    if vc is None:
-        vc = inter.author.voice.channel
-    if vc is None:
-        vc = disnake.utils.get(inter.guild.voice_channels, name="一般")
-    members = vc.members
-    random.shuffle(members)
-    member_names = [f"{i + 1}: **{member.mention}**" for i, member in enumerate(members)]
-    embed = MyEmbed(inter=inter, title="", color=disnake.Color.brand_green())
-    embed.add_field(name=f'Members in "{vc.name}"', value="\n".join(member_names), inline=False)
-    await inter.response.send_message(embed=embed)
+bot.add_cog(Shuffle(bot))
 
 
 @bot.slash_command()
