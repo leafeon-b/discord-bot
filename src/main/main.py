@@ -4,6 +4,7 @@ import disnake
 import settings
 from cogs.denpo import Denpo
 from cogs.poll import Poll
+from cogs.random_hiragana import RandomHiragana
 from cogs.random_word import RandomWord
 from cogs.shuffle import Shuffle
 from disnake.ext import commands
@@ -25,62 +26,7 @@ bot.add_cog(RandomWord(bot))
 bot.add_cog(Denpo(bot))
 bot.add_cog(Shuffle(bot))
 bot.add_cog(Poll(bot))
-
-
-@bot.slash_command(name="hiragana")
-async def random_hiragana(inter: disnake.AppCmdInter):
-    """ひらがな1文字をランダム生成"""
-    hiraganas = [
-        "あ",
-        "い",
-        "う",
-        "え",
-        "お",
-        "か",
-        "き",
-        "く",
-        "け",
-        "こ",
-        "さ",
-        "し",
-        "す",
-        "せ",
-        "そ",
-        "た",
-        "ち",
-        "つ",
-        "て",
-        "と",
-        "な",
-        "に",
-        "ぬ",
-        "ね",
-        "の",
-        "は",
-        "ひ",
-        "ふ",
-        "へ",
-        "ほ",
-        "ま",
-        "み",
-        "む",
-        "め",
-        "も",
-        "や",
-        "ゆ",
-        "よ",
-        "ら",
-        "り",
-        "る",
-        "れ",
-        "ろ",
-        "わ",
-        "を",
-        "ん",
-    ]
-    h = random.choice(hiraganas)
-    embed = MyEmbed(inter=inter, title=h, color=disnake.Color.dark_gold())
-    await inter.response.send_message(embed=embed)
+bot.add_cog(RandomHiragana(bot))
 
 
 @bot.slash_command(name="random")
