@@ -11,11 +11,6 @@ class RandomWord(commands.Cog):
     async def on_ready(self):
         print(f"{__name__} cog loaded.")
 
-    # @commands.slash_command()
-    # async def hello(self, ctx, *, member: disnake.Member = None):
-    #     """Says hello"""
-    #     print("hello")
-
     @commands.slash_command(name="random_word")
     async def random_word(inter: disnake.AppCmdInter):
         """ランダムなお題を出す"""
