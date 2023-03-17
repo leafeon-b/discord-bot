@@ -21,16 +21,25 @@ class Bot(commands.Bot):
         print("------")
 
 
-intents = disnake.Intents.all()
-bot = Bot(intents)
-bot.add_cog(RandomWord(bot))
-bot.add_cog(Denpo(bot))
-bot.add_cog(Shuffle(bot))
-bot.add_cog(Poll(bot))
-bot.add_cog(RandomHiragana(bot))
-bot.add_cog(RandomN(bot))
-bot.add_cog(RandomTwice(bot))
-bot.add_cog(Dice(bot))
-bot.add_cog(Help(bot))
+def main():
+    cogs = [
+        RandomWord,
+        Denpo,
+        Shuffle,
+        Poll,
+        RandomHiragana,
+        RandomN,
+        RandomTwice,
+        Dice,
+        Help,
+    ]
+    intents = disnake.Intents.all()
+    bot = Bot(intents)
+    for cog in cogs:
+        bot.add_cog(cog(bot))
 
-bot.run(settings.TOKEN)
+    bot.run(settings.TOKEN)
+
+
+if __name__ == "__main__":
+    main()
