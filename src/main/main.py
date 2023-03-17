@@ -3,6 +3,7 @@ import random
 import disnake
 import settings
 from cogs.denpo import Denpo
+from cogs.dice import Dice
 from cogs.poll import Poll
 from cogs.random_hiragana import RandomHiragana
 from cogs.random_n import RandomN
@@ -31,14 +32,7 @@ bot.add_cog(Poll(bot))
 bot.add_cog(RandomHiragana(bot))
 bot.add_cog(RandomN(bot))
 bot.add_cog(RandomTwice(bot))
-
-
-@bot.slash_command()
-async def dice(inter: disnake.AppCmdInter, number: commands.Range[1, ...]):
-    """指定した数を最大値としたサイコロを振る(自分だけに表示)"""
-    n = random.randint(1, number)
-    embed = MyEmbed(inter=inter, title=n, description="", color=disnake.Color.fuchsia())
-    await inter.response.send_message(embed=embed, ephemeral=True)
+bot.add_cog(Dice(bot))
 
 
 @bot.slash_command()
