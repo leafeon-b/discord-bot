@@ -5,6 +5,7 @@ import settings
 from cogs.denpo import Denpo
 from cogs.poll import Poll
 from cogs.random_hiragana import RandomHiragana
+from cogs.random_n import RandomN
 from cogs.random_word import RandomWord
 from cogs.shuffle import Shuffle
 from disnake.ext import commands
@@ -27,16 +28,7 @@ bot.add_cog(Denpo(bot))
 bot.add_cog(Shuffle(bot))
 bot.add_cog(Poll(bot))
 bot.add_cog(RandomHiragana(bot))
-
-
-@bot.slash_command(name="random")
-async def random_n(inter: disnake.AppCmdInter, min: commands.Range[2, ...] = 1, max: commands.Range[2, ...] = 10):
-    """指定した最小値と最大値の範囲内の自然数をランダム生成(初期値は2~10)"""
-    if max < min:
-        max = min
-    n = random.randint(min, max)
-    embed = MyEmbed(inter=inter, title=n, description="", color=disnake.Color.dark_orange())
-    await inter.response.send_message(embed=embed)
+bot.add_cog(RandomN(bot))
 
 
 @bot.slash_command(name="random_twice")
