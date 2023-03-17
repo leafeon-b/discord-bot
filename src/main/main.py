@@ -1,13 +1,12 @@
-# At the top of the file.
 import random
 
 import disnake
 import settings
+from cogs.denpo import Denpo
 from cogs.random_word import RandomWord
-from DenpoView import DenpoView
+from components.PollView import PollView
 from disnake.ext import commands
 from MyEmbed import MyEmbed
-from PollView import PollView
 
 
 class Bot(commands.Bot):
@@ -22,13 +21,7 @@ class Bot(commands.Bot):
 intents = disnake.Intents.all()
 bot = Bot(intents)
 bot.add_cog(RandomWord(bot))
-
-
-@bot.slash_command()
-async def denpo(inter: disnake.AppCmdInter):
-    """デンポー!!ゲームを開始する"""
-    view = DenpoView()
-    await inter.send(embed=view.embed, view=view)
+bot.add_cog(Denpo(bot))
 
 
 @bot.slash_command()

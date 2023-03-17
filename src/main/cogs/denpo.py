@@ -1,9 +1,9 @@
 import disnake
-from components.WordView import WordView
+from components.DenpoView import DenpoView
 from disnake.ext import commands
 
 
-class RandomWord(commands.Cog):
+class Denpo(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
@@ -11,8 +11,8 @@ class RandomWord(commands.Cog):
     async def on_ready(self):
         print(f"{__name__} cog loaded.")
 
-    @commands.slash_command(name="random_word")
+    @commands.slash_command(name="denpo")
     async def random_word(inter: disnake.AppCmdInter):
-        """ランダムなお題を出す"""
-        view = WordView("foo")
+        """デンポー!!ゲームを開始する"""
+        view = DenpoView()
         await inter.send(embed=view.embed, view=view)
