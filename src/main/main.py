@@ -67,12 +67,6 @@ async def random_hiragana(inter: disnake.AppCmdInter):
     await inter.response.send_message(embed=embed)
 
 
-@bot.slash_command(name="ito")
-async def random_n(inter: disnake.AppCmdInter):
-    """100以下の自然数をランダム生成(自分だけに表示)"""
-    n = random.randint(1, 100)
-    embed = MyEmbed(inter=inter, title=n, color=disnake.Color.dark_orange())
-    await inter.response.send_message(embed=embed, ephemeral=True)
 
 
 @bot.slash_command()
