@@ -2,10 +2,10 @@
 import random
 
 import disnake
-from disnake.ext import commands
-
 import settings
+from cogs.random_word import RandomWord
 from DenpoView import DenpoView
+from disnake.ext import commands
 from MyEmbed import MyEmbed
 from PollView import PollView
 
@@ -21,6 +21,7 @@ class Bot(commands.Bot):
 
 intents = disnake.Intents.all()
 bot = Bot(intents)
+bot.add_cog(RandomWord(bot))
 
 
 @bot.slash_command()
