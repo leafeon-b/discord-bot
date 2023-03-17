@@ -39,7 +39,8 @@
 				"mhutchie.git-graph",
 				"johnpapa.vscode-peacock",
 				"redhat.vscode-yaml",
-				"mechatroner.rainbow-csv"
+				"mechatroner.rainbow-csv",
+				"ms-python.isort"
 			]
 		}
 	},
