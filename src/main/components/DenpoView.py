@@ -3,9 +3,8 @@ from dataclasses import dataclass
 from typing import ClassVar, Pattern
 
 import disnake
+from components.MyEmbed import MyEmbed
 from disnake import Embed, MessageInteraction, TextInputStyle
-
-from MyEmbed import MyEmbed
 
 
 @dataclass
@@ -53,9 +52,7 @@ class DenpoView(disnake.ui.View):
         self.update_embed()
 
     def create_embed(self, *, title: str, description: str) -> disnake.Embed:
-        return disnake.Embed(
-            title=title, description=description, color=disnake.Color.blurple()
-        )
+        return disnake.Embed(title=title, description=description, color=disnake.Color.blurple())
 
     def update_embed(self):
         self.embed = self.create_embed(
@@ -89,7 +86,7 @@ class DenpoView(disnake.ui.View):
 
         description = ""
         for i in range(index + 1):
-            phrase = f"__{self.hints[i].phrase}__" if i == index else self.hints[i].phrase # 最後に追加したヒントは下線で強調
+            phrase = f"__{self.hints[i].phrase}__" if i == index else self.hints[i].phrase  # 最後に追加したヒントは下線で強調
             description += f"{phrase} ({self.hints[i].author})\n"
         embed = self.create_embed(title="Denpo!!", description=description)
         await inter.response.edit_message(view=view, embed=embed)
@@ -145,11 +142,11 @@ class DenpoModal(disnake.ui.Modal):
         for key, value in inter.text_values.items():
             if key == "hint":
                 author_id = inter.author.id
-                if author_id in [hint.author_id for hint in self.view.hints]: # ユーザがすでにヒントを送信済みかチェック
+                if author_id in [hint.author_id for hint in self.view.hints]:  # ユーザがすでにヒントを送信済みかチェック
                     await inter.response.send_message(f"{inter.author.display_name} はすでにヒントを送信済みです.")
                     return
-                p: Pattern = re.compile(r'^[ぁ-ゖ]+$')
-                if p.fullmatch(value) is None: # ヒントにひらがな以外の文字が含まれていないかチェック
+                p: Pattern = re.compile(r"^[ぁ-ゖ]+$")
+                if p.fullmatch(value) is None:  # ヒントにひらがな以外の文字が含まれていないかチェック
                     await inter.response.send_message("ヒントはひらがなのみ使用できます.")
                     return
                 self.view.append_hint(Hint(inter.author.id, inter.author.display_name, value))

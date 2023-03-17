@@ -1,6 +1,6 @@
 import disnake
+from components.MyEmbed import MyEmbed
 from disnake.ext import commands
-from MyEmbed import MyEmbed
 
 
 class Help(commands.Cog):
