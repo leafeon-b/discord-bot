@@ -67,6 +67,25 @@ async def random_hiragana(inter: disnake.AppCmdInter):
     await inter.response.send_message(embed=embed)
 
 
+@bot.slash_command(name="random")
+async def random_n(inter: disnake.AppCmdInter, min: commands.Range[2, ...] = 1, max: commands.Range[2, ...] = 10):
+    """指定した最小値と最大値の範囲内の自然数をランダム生成(初期値は2~10)"""
+    if max < min:
+        max = min
+    n = random.randint(min, max)
+    embed = MyEmbed(inter=inter, title=n, description="", color=disnake.Color.dark_orange())
+    await inter.response.send_message(embed=embed)
+
+
+@bot.slash_command(name="random_twice")
+async def random_n_twice(inter: disnake.AppCmdInter, min: commands.Range[1, ...] = 1, max: commands.Range[1, ...] = 6):
+    """指定した最小値と最大値の範囲内の自然数を2回ランダム生成(初期値は1~6)"""
+    if max < min:
+        max = min
+    n1 = random.randint(min, max)
+    n2 = random.randint(min, max)
+    embed = MyEmbed(inter=inter, title=f"{n1}, {n2}", description="", color=disnake.Color.dark_orange())
+    await inter.response.send_message(embed=embed)
 
 
 @bot.slash_command()
