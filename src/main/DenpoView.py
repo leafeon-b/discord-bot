@@ -1,6 +1,5 @@
 import re
 from dataclasses import dataclass
-from datetime import datetime
 from typing import ClassVar, Pattern
 
 import disnake
@@ -55,7 +54,7 @@ class DenpoView(disnake.ui.View):
 
     def create_embed(self, *, title: str, description: str) -> disnake.Embed:
         return disnake.Embed(
-            title=title, description=description, color=disnake.Color.blurple(), timestamp=datetime.now()
+            title=title, description=description, color=disnake.Color.blurple()
         )
 
     def update_embed(self):
