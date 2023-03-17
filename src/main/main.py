@@ -3,9 +3,9 @@ import random
 import disnake
 import settings
 from cogs.denpo import Denpo
+from cogs.poll import Poll
 from cogs.random_word import RandomWord
 from cogs.shuffle import Shuffle
-from components.PollView import PollView
 from disnake.ext import commands
 from MyEmbed import MyEmbed
 
@@ -24,14 +24,7 @@ bot = Bot(intents)
 bot.add_cog(RandomWord(bot))
 bot.add_cog(Denpo(bot))
 bot.add_cog(Shuffle(bot))
-
-
-@bot.slash_command()
-async def poll(inter: disnake.AppCmdInter, vc: disnake.VoiceChannel = None):
-    """投票"""
-
-    view = PollView(inter, vc)
-    await inter.send(embed=view.embed, view=view)
+bot.add_cog(Poll(bot))
 
 
 @bot.slash_command(name="hiragana")
