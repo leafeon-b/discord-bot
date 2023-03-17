@@ -26,7 +26,6 @@ bot.add_cog(Denpo(bot))
 
 @bot.slash_command()
 async def shuffle(inter: disnake.AppCmdInter, vc: disnake.VoiceChannel = None):
-    # """Shuffle vc members(default vc is the one that you are in, or else "一般")."""
     """VCにいるメンバーをシャッフルする.
     VCを指定しない場合はコマンドの使用者が入っているVCが適用される.
     コマンドの使用者がVCに入っていない場合は"一般"チャンネルが適用される.
@@ -39,7 +38,7 @@ async def shuffle(inter: disnake.AppCmdInter, vc: disnake.VoiceChannel = None):
     random.shuffle(members)
     member_names = [f"{i + 1}: **{member.mention}**" for i, member in enumerate(members)]
     embed = MyEmbed(inter=inter, title="", color=disnake.Color.brand_green())
-    embed.add_field(name=f"Members in \"{vc.name}\"", value="\n".join(member_names), inline=False)
+    embed.add_field(name=f'Members in "{vc.name}"', value="\n".join(member_names), inline=False)
     await inter.response.send_message(embed=embed)
 
 
@@ -54,7 +53,54 @@ async def poll(inter: disnake.AppCmdInter, vc: disnake.VoiceChannel = None):
 @bot.slash_command(name="hiragana")
 async def random_hiragana(inter: disnake.AppCmdInter):
     """ひらがな1文字をランダム生成"""
-    hiraganas = ["あ","い","う","え","お","か","き","く","け","こ","さ","し","す","せ","そ","た","ち","つ","て","と","な","に","ぬ","ね","の","は","ひ","ふ","へ","ほ","ま","み","む","め","も","や","ゆ","よ","ら","り","る","れ","ろ","わ","を","ん"]
+    hiraganas = [
+        "あ",
+        "い",
+        "う",
+        "え",
+        "お",
+        "か",
+        "き",
+        "く",
+        "け",
+        "こ",
+        "さ",
+        "し",
+        "す",
+        "せ",
+        "そ",
+        "た",
+        "ち",
+        "つ",
+        "て",
+        "と",
+        "な",
+        "に",
+        "ぬ",
+        "ね",
+        "の",
+        "は",
+        "ひ",
+        "ふ",
+        "へ",
+        "ほ",
+        "ま",
+        "み",
+        "む",
+        "め",
+        "も",
+        "や",
+        "ゆ",
+        "よ",
+        "ら",
+        "り",
+        "る",
+        "れ",
+        "ろ",
+        "わ",
+        "を",
+        "ん",
+    ]
     h = random.choice(hiraganas)
     embed = MyEmbed(inter=inter, title=h, color=disnake.Color.dark_gold())
     await inter.response.send_message(embed=embed)
