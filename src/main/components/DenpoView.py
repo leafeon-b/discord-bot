@@ -34,7 +34,7 @@ class DenpoView(disnake.ui.View):
     embed: Embed
     hints: list[Hint]
 
-    def __init__(self, *, timeout: float | None = 3000):
+    def __init__(self, *, timeout: float | None = None):
         super().__init__(timeout=timeout)
         self.hints = []
         self.update_embed()

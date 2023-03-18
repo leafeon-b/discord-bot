@@ -22,7 +22,7 @@ class PollView(disnake.ui.View):
     embed: disnake.Embed
     votes: list[Vote]
 
-    def __init__(self, inter: disnake.AppCmdInter, vc: disnake.VoiceChannel, *, timeout: float | None = 180):
+    def __init__(self, inter: disnake.AppCmdInter, vc: disnake.VoiceChannel, *, timeout: float | None = None):
         super().__init__(timeout=timeout)
         self.inter = inter
         if vc is None:

@@ -8,7 +8,7 @@ class WordView(disnake.ui.View):
     word: str
     viewr_ids: set[int]
 
-    def __init__(self, word: str, *, timeout: float | None = 300):
+    def __init__(self, word: str, *, timeout: float | None = None):
         super().__init__(timeout=timeout)
         self.word = word
         self.viewr_ids = set()
